@@ -4,6 +4,6 @@ import com.shusharin.chucknorrisapp.core.Abstract
 import com.shusharin.chucknorrisapp.domain.ChuckDomain
 
 
-sealed class ChuckData : Abstract.Object<ChuckDomain, Abstract.Mapper.Empty>() {
+sealed class ChucksData : Abstract.Object<ChuckDomain, ChucksDataToDomainMapper>() {
     //todo fix
 }
