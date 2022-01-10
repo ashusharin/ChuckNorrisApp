@@ -13,16 +13,22 @@ import com.shusharin.chucknorrisapp.core.Chuck
 }
  **/
 data class ChuckCloud(
+    @SerializedName("categories")
+    val categories: List<String>,
+    @SerializedName("created_at")
+    val createdAt: String,
     @SerializedName("icon_url")
     private val icon: String,
     @SerializedName("id")
     private val id: String,
+    @SerializedName("updated_at")
+    val updatedAt: String,
     @SerializedName("url")
     private val url: String,
     @SerializedName("value")
     private val value: String,
 ) : Abstract.Object<Chuck, ChuckCloudMapper>() {
-    override fun map(mapper: ChuckCloudMapper) = mapper.map(icon, id, url, value)
+    override fun map(mapper: ChuckCloudMapper) = mapper.map(categories,createdAt,icon, id,updatedAt, url, value)
 }
 
 

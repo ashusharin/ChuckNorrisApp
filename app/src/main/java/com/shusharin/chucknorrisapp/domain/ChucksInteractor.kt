@@ -1,17 +1,16 @@
 package com.shusharin.chucknorrisapp.domain
 
-import com.shusharin.chucknorrisapp.data.ChuckRepository
 import com.shusharin.chucknorrisapp.data.ChucksDataToDomainMapper
-import com.shusharin.chucknorrisapp.presentation.ChucksUI
+import com.shusharin.chucknorrisapp.data.repository.ChuckRepository
 
 interface ChucksInteractor {
 
-    suspend fun fetchJoke(): ChuckDomain
+    suspend fun fetchJoke(): ChucksDomain
 
     class ChucksInteractorImpl(
         private val chuckRepository: ChuckRepository,
         private val mapper: ChucksDataToDomainMapper,
     ) : ChucksInteractor {
-        override suspend fun fetchJoke(): ChuckDomain = chuckRepository.fetchJoke().map(mapper)
+        override suspend fun fetchJoke(): ChucksDomain = chuckRepository.fetchJoke().map(mapper)
     }
 }

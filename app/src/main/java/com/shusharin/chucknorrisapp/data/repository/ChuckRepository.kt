@@ -1,6 +1,6 @@
 package com.shusharin.chucknorrisapp.data.repository
 
-import com.shusharin.chucknorrisapp.data.ChuckData
+import com.shusharin.chucknorrisapp.data.ChucksData
 import com.shusharin.chucknorrisapp.data.dataSource.local.ChuckLocalDataSource
 import com.shusharin.chucknorrisapp.data.dataSource.local.mapper.ChucksLocalMapper
 import com.shusharin.chucknorrisapp.data.dataSource.remote.ChuckRemoteDataSource
@@ -8,7 +8,7 @@ import com.shusharin.chucknorrisapp.data.repository.mapper.ChucksCloudMapper
 
 interface ChuckRepository {
 
-    suspend fun fetchJoke(): ChuckData
+    suspend fun fetchJoke(): ChucksData
 
     class ChuckRepositoryImpl(
         private val remoteDataSource: ChuckRemoteDataSource,
@@ -18,19 +18,19 @@ interface ChuckRepository {
     ) : ChuckRepository {
         override suspend fun fetchJoke() = try {
             val jokeLocal = localDataSource.fetchJoke()
-            if (jokeLocal == null) {
+            if (jokeLocal.isEmpty()) {
                 val jokeCloud = remoteDataSource.fetchJoke()
                 val joke = chucksCloudMapper.map(jokeCloud)
                 localDataSource.saveJoke(joke)
-                ChuckData.Success(joke)
+                ChucksData.Success(joke)
             } else {
-                ChuckData.Success(chucksLocalMapper.map(jokeLocal))
+                ChucksData.Success(chucksLocalMapper.map(jokeLocal))
             }
             //Get data from remote
             //Map this data to our model
 
         } catch (e: Exception) {
-            ChuckData.Fail(e)
+            ChucksData.Fail(e)
         }
     }
 }

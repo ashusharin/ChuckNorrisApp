@@ -6,13 +6,13 @@ import com.shusharin.chucknorrisapp.presentation.ChucksUI
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
-sealed class ChuckDomain : Abstract.Object<ChucksUI, ChucksDomainToUIMapper>() {
+sealed class ChucksDomain : Abstract.Object<ChucksUI, ChucksDomainToUIMapper>() {
 
-    class Success(private val joke: Chuck) : ChuckDomain() {
+    class Success(private val joke: List<Chuck>) : ChucksDomain() {
         override fun map(mapper: ChucksDomainToUIMapper): ChucksUI = mapper.map(joke)
     }
 
-    class Fail(private val e: Exception) : ChuckDomain() {
+    class Fail(private val e: Exception) : ChucksDomain() {
         override fun map(mapper: ChucksDomainToUIMapper): ChucksUI = mapper.map(
             when (e) {
                 is UnknownHostException -> ErrorType.NO_CONNECTION
