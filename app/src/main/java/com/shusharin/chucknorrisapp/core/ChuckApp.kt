@@ -1,6 +1,9 @@
 package com.shusharin.chucknorrisapp.core
 
 import android.app.Application
+import com.shusharin.chucknorrisapp.data.ChuckRepository
+import com.shusharin.chucknorrisapp.domain.ChucksDataToDomainMapperImpl
+import com.shusharin.chucknorrisapp.domain.ChucksInteractor
 import com.shusharin.chucknorrisapp.data.dataSource.remote.api.ChuckCloudMapper
 import com.shusharin.chucknorrisapp.data.dataSource.remote.api.ChuckService
 import com.shusharin.chucknorrisapp.data.dataSource.local.ChuckLocalDataSource
@@ -8,7 +11,6 @@ import com.shusharin.chucknorrisapp.data.dataSource.local.database.RealmProvider
 import com.shusharin.chucknorrisapp.data.dataSource.local.mapper.ChuckLocalMapper
 import com.shusharin.chucknorrisapp.data.dataSource.local.mapper.ChucksLocalMapper
 import com.shusharin.chucknorrisapp.data.dataSource.remote.ChuckRemoteDataSource
-import com.shusharin.chucknorrisapp.data.repository.ChuckRepository
 import com.shusharin.chucknorrisapp.data.repository.mapper.ChucksCloudMapper
 import retrofit2.Retrofit
 
@@ -39,5 +41,6 @@ class ChuckApp : Application() {
             chucksCloudMapper,
             chucksLocalMapper,
         )
+        val chuckInteractor = ChucksInteractor.ChucksInteractorImpl(chuckRepository, ChucksDataToDomainMapperImpl( ))
     }
 }

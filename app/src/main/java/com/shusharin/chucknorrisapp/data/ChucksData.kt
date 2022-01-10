@@ -17,5 +17,3 @@ sealed class ChuckData : Abstract.Object<ChuckDomain, ChuckDataToDomainMapper>()
 
 
 }
-
-
