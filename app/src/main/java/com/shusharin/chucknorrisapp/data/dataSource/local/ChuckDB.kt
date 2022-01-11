@@ -3,6 +3,7 @@ package com.shusharin.chucknorrisapp.data.dataSource.local
 import com.shusharin.chucknorrisapp.core.Abstract
 import com.shusharin.chucknorrisapp.core.Chuck
 import com.shusharin.chucknorrisapp.data.dataSource.local.mapper.ChuckLocalMapper
+import io.realm.RealmList
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
@@ -15,11 +16,14 @@ import io.realm.annotations.PrimaryKey
  **/
 
 open class ChuckDB : RealmObject(), Abstract.Mapable<Chuck, ChuckLocalMapper> {
+    var categories = RealmList<String>()
+    var createdAt:String = ""
     var icon: String = ""
     @PrimaryKey
     var id: String = "-1"
+    var updatedAt: String = ""
     var url: String = ""
     var value: String = ""
 
-    override fun map(mapper: ChuckLocalMapper) = Chuck(icon, id, url, value)
+    override fun map(mapper: ChuckLocalMapper) = Chuck(categories,createdAt,icon, id,updatedAt, url, value)
 }

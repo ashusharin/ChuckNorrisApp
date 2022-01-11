@@ -27,6 +27,6 @@ interface ChuckCloudMapper : Abstract.Mapper {
             url: String,
             value: String,
         ) =
-            Chuck(icon, id, url, value)
+            Chuck(categories,createdAt,icon, id,updatedAt, url, value)
     }
 }

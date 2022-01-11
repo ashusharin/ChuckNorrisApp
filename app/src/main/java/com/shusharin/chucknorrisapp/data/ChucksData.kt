@@ -7,11 +7,11 @@ import com.shusharin.chucknorrisapp.domain.ChucksDomain
 
 
 sealed class ChucksData : Abstract.Object<ChucksDomain, ChucksDataToDomainMapper>() {
-    class Success(private val joke: List<Chuck>) : ChucksData() {
+    data class Success(private val joke: List<Chuck>) : ChucksData() {
         override fun map(mapper: ChucksDataToDomainMapper) = mapper.map(joke)
     }
 
-    class Fail(private val e: Exception) : ChucksData() {
+    data class Fail(private val e: Exception) : ChucksData() {
         override fun map(mapper: ChucksDataToDomainMapper) = mapper.map(e)
     }
 

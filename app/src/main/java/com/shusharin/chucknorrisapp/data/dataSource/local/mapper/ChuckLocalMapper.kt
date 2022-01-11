@@ -10,7 +10,16 @@ interface ChuckLocalMapper : Abstract.Mapper {
 
     class ChuckLocalMapperImpl : ChuckLocalMapper {
         override fun map(joke: ChuckDB): Chuck {
-            return Chuck(joke.icon, joke.id, joke.url, joke.value)
+            return Chuck(joke.categories,
+                joke.createdAt,
+                joke.icon,
+                joke.id,
+                joke.updatedAt,
+                joke.url,
+                joke.value)
         }
     }
+
+
+
 }
